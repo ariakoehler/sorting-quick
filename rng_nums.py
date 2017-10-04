@@ -13,9 +13,12 @@ if __name__=='__main__':
 
     file_out.write('{}\n{}\n'.format(num_words, num_words))
 
-    for i in range(50):
-        alpha = list('qwertyuiop[]\asdfghjkl;zxcvbnm,./0123645789')
+    for i in range(50000):
+        alpha = list('qwertyuiop[]\asdfghjkl;zxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM,.0123645789')
         np_alpha = np.array(alpha)
-        random_word = str(np.random.choice(np_alpha, 30))
+        random_word = np.random.choice(np_alpha, 30)
         
-        file_out.write('{}\n'.format(random_word))
+        for j in range(random_word.size - 1):
+            file_out.write('{}'.format(random_word[j]))
+            
+        file_out.write('\n')

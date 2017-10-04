@@ -1,3 +1,5 @@
+#define CATCH_CONFIG_RUNNER
+
 #include <iostream>
 #include <fstream>
 
@@ -6,25 +8,16 @@
 
 using namespace std;
 
+int runCatchTests(int argc, char* argv[]) {
+    return Catch::Session().run();
+}
+
 int main(int argc, char *argv[])
 {
-    /*
-    int makeVec[20] = {26,42,500,3,92,-75,20,666,342,78,71,681,502,489,203,25,759,40,42,42};
-    DSVector<int> testVec0 = DSVector<int>(makeVec, 20);
-    DSVector<int> testVec1 = testVec0;
-    DSVector<int> testVec2 = testVec0;
 
-    testVec1.swap(5,12);
-
-    //testVec0.sort(0,testVec0.getSize()-1);
-    //testVec1.quicksort(0,testVec1.getSize()-1);
-    testVec2.dualPivotQuicksort(0, testVec2.getSize()-1);
-
-    //cout << testVec0 << endl;
-    //cout << testVec1 << endl;
-    cout << testVec2 << endl;
-
-    */
+    if(DSString(argv[1]) == DSString("-t")) {
+        runCatchTests(argc, argv);
+    }
 
 
     DSString fileName;

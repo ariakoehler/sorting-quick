@@ -192,6 +192,14 @@ bool DSString::operator !=(const char * rhs) const {
 
 //tells whether or not a string comes after this one alphabetically
 bool DSString::operator <(const DSString& rhs) const {
+    //compare lengths for true case
+    //compare lengths for false case
+
+    //if lengths equal
+        //strcmp
+        //default to false if equal
+
+    /*
     //normalize
     DSString lnorm = this->normalize();
     DSString rnorm = rhs.normalize();
@@ -212,6 +220,7 @@ bool DSString::operator <(const DSString& rhs) const {
         }
     }
     return false;
+    */
 }
 
 
