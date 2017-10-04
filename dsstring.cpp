@@ -192,35 +192,20 @@ bool DSString::operator !=(const char * rhs) const {
 
 //tells whether or not a string comes after this one alphabetically
 bool DSString::operator <(const DSString& rhs) const {
-    //compare lengths for true case
-    //compare lengths for false case
-
-    //if lengths equal
-        //strcmp
-        //default to false if equal
-
-    /*
-    //normalize
-    DSString lnorm = this->normalize();
-    DSString rnorm = rhs.normalize();
-
-    //find minimum length to avoid going out of bounds
-    unsigned int minLength = (lnorm.getLength() < rnorm.getLength()) ? (lnorm.getLength()) : (rnorm.getLength());
-
-    for(unsigned int i=0; i<minLength; i++) {
-        if(int(lnorm[i]) > int(rnorm[i])){
-            //if char is greater than, return false
-            return false;
-        } else if(int(lnorm[i]) < int(rnorm[i])) {
-            //if char is less than, return true
+    //compare lengths
+    if(getLength() > rhs.getLength())
+        return false;
+    else if(getLength() < rhs.getLength())
+        return true;
+    else {
+        //if strings equal length, compare alpha order
+        if(strcmp(c_str(), rhs.c_str()) < 0)
             return true;
-        } else {
-            //if chars equal, continue
-            continue;
-        }
+        else
+            return false;
+        //default to false
     }
-    return false;
-    */
+
 }
 
 
@@ -233,26 +218,19 @@ bool DSString::operator >=(const DSString& rhs) const {
 //tells whether a string comes after this one alphabetically
 bool DSString::operator >(const DSString& rhs) const {
 
-    //normalize
-    DSString lnorm = this->normalize();
-    DSString rnorm = rhs.normalize();
-
-    //find minimum length to avoid going out of bounds
-    unsigned int minLength = (lnorm.getLength() < rnorm.getLength()) ? (lnorm.getLength()) : (rnorm.getLength());
-
-    for(unsigned int i=0; i<minLength; i++) {
-        if(int(lnorm[i]) < int(rnorm[i])){
-            //if char is greater than, return false
-            return false;
-        } else if(int(lnorm[i]) > int(rnorm[i])) {
-            //if char is less than, return true
+    //check strings for length
+    if(getLength() < rhs.getLength())
+        return true;
+    else if(getLength() > rhs.getLength())
+        return false;
+    else {
+        //if lengths equal, compare alpha order
+        if(strcmp(c_str(), rhs.c_str()) > 0)
             return true;
-        } else {
-            //if chars equal, continue
-            continue;
-        }
+        else
+            return false;
+        //default to false
     }
-    return false;
 }
 
 

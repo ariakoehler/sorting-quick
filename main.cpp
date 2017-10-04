@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <fstream>
-
+#include "catch.hpp"
 #include "dsvector.hpp"
 #include "dsstring.h"
 
