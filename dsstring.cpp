@@ -1,7 +1,6 @@
 #include "dsstring.h"
 #include <vector>
 #include <cstring>
-#include <cmath>
 
 using namespace std;
 
@@ -62,32 +61,9 @@ char* DSString::c_str() const {
 }
 
 
-//takes a string of all digits and returns it as an integer
+//converts the DSString to an int
 int DSString::stringToInt() const {
-
-    int total = 0;
-    bool negative = false;
-
-    for(unsigned int i=1; i<length; i++) {
-        //check to see if the number is negative
-        if(i == length - 1 && word[length - i - 1] == '-') {
-            negative = true;
-            continue;
-        }
-
-        //check to make sure is a digit
-        if(int(word[length - i - 1]) < 48 || int(word[length - i - 1]) > 57) {
-            throw(invalid_argument("String must consist entirely of numeric characters to use stringToInt."));
-        }
-        //increase the total by the value of the digit * 10 to the power of its location
-        total += (word[length - i - 1] - '0') * pow(10.0, double(i - 1));
-    }
-
-    //account for negatives
-    if(negative)
-        total *= -1;
-
-    return total;
+    return atoi(c_str());
 }
 
 
@@ -142,12 +118,16 @@ DSString DSString::normalize() const {
     for(int i=0; i<strlen(word); i++) {
         //skip punctuation
         if(word[i] != ',' && word[i] != '.' && word[i] != '!' && word[i] != '?' && word[i] != ';' && word[i] != ':' && word[i] != '(' && word[i] != ')' && word[i] != '[' && word[i] != ']' && word[i] != '{' && word[i] != '}') {
+            //don't normalize case per parameters of Sprint3
+            temp.push_back(word[i]);
+            /*
             //normalize case
             if(int(word[i]) >= 65 && int(word[i]) <=90) {
                 temp.push_back(char(word[i] + 32));
             } else {
                 temp.push_back(word[i]);
             }
+            */
         }
     }
 
@@ -192,26 +172,20 @@ bool DSString::operator !=(const char * rhs) const {
 
 //tells whether or not a string comes after this one alphabetically
 bool DSString::operator <(const DSString& rhs) const {
-    //normalize
-    DSString lnorm = this->normalize();
-    DSString rnorm = rhs.normalize();
-
-    //find minimum length to avoid going out of bounds
-    unsigned int minLength = (lnorm.getLength() < rnorm.getLength()) ? (lnorm.getLength()) : (rnorm.getLength());
-
-    for(unsigned int i=0; i<minLength; i++) {
-        if(int(lnorm[i]) > int(rnorm[i])){
-            //if char is greater than, return false
-            return false;
-        } else if(int(lnorm[i]) < int(rnorm[i])) {
-            //if char is less than, return true
+    //compare lengths
+    if(getLength() > rhs.getLength())
+        return false;
+    else if(getLength() < rhs.getLength())
+        return true;
+    else {
+        //if strings equal length, compare alpha order
+        if(strcmp(c_str(), rhs.c_str()) < 0)
             return true;
-        } else {
-            //if chars equal, continue
-            continue;
-        }
+        else
+            return false;
+            //default to false
     }
-    return false;
+
 }
 
 
@@ -224,30 +198,23 @@ bool DSString::operator >=(const DSString& rhs) const {
 //tells whether a string comes after this one alphabetically
 bool DSString::operator >(const DSString& rhs) const {
 
-    //normalize
-    DSString lnorm = this->normalize();
-    DSString rnorm = rhs.normalize();
-
-    //find minimum length to avoid going out of bounds
-    unsigned int minLength = (lnorm.getLength() < rnorm.getLength()) ? (lnorm.getLength()) : (rnorm.getLength());
-
-    for(unsigned int i=0; i<minLength; i++) {
-        if(int(lnorm[i]) < int(rnorm[i])){
-            //if char is greater than, return false
-            return false;
-        } else if(int(lnorm[i]) > int(rnorm[i])) {
-            //if char is less than, return true
+    //check strings for length
+    if(getLength() < rhs.getLength())
+        return false;
+    else if(getLength() > rhs.getLength())
+        return true;
+    else {
+        //if lengths equal, compare alpha order
+        if(strcmp(c_str(), rhs.c_str()) > 0)
             return true;
-        } else {
-            //if chars equal, continue
-            continue;
-        }
+        else
+            return false;
+            //default to false
     }
-    return false;
 }
 
 
 //tells whether a string comes before this one alphabetically
 bool DSString::operator <=(const DSString& rhs) const {
-    return !(*this >= rhs);
+    return !(*this > rhs);
 }
