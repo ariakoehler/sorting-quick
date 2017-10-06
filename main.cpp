@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
 
     if(DSString(argv[1]) == DSString("-t")) {
         runCatchTests(argc, argv);
+        return 0;
     }
 
 

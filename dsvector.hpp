@@ -69,6 +69,7 @@ DSVector<T>::DSVector() {
     array = new T[capacity] {};    //dyn. alloc array
 }
 
+
 //constructor for array takes T* and size
 template <class T>
 DSVector<T>::DSVector(T * contents, int length) {
@@ -82,6 +83,7 @@ DSVector<T>::DSVector(T * contents, int length) {
     }
 }
 
+
 //constructor for int size
 template <class T>
 DSVector<T>::DSVector(int length){
@@ -89,6 +91,7 @@ DSVector<T>::DSVector(int length){
     capacity = length;          //set capacity at 5+size
     array = new T[capacity] {}; //dyn alloc array
 }
+
 
 //copy constructor
 template<class T>
@@ -104,11 +107,13 @@ DSVector<T>::DSVector(const DSVector<T> & rhs) {
     }
 }
 
+
 //destructor
 template <class T>
 DSVector<T>::~DSVector(){
     delete[] array;
 }
+
 
 //===============
 //GETTERS/SETTERS
@@ -119,10 +124,12 @@ int DSVector<T>::getCapacity() const {
     return capacity;
 }
 
+
 template <class T>
 int DSVector<T>::getSize() const {
     return size;
 }
+
 
 template <class T>
 T * DSVector<T>::getArray() const {
@@ -155,6 +162,7 @@ DSVector<T> DSVector<T>::operator =(const DSVector<T>& rhs) {
     return *this;
 }
 
+
 //Equality
 template <class T>
 bool DSVector<T>::operator ==(const DSVector<T>& rhs) const {
@@ -172,11 +180,13 @@ bool DSVector<T>::operator ==(const DSVector<T>& rhs) const {
     return true;
 }
 
+
 //Inequality
 template <class T>
 bool DSVector<T>::operator !=(const DSVector<T>& rhs) const {
     return !(*this == rhs); //not equals
 }
+
 
 //Addition (for T)
 template <class T>
@@ -186,6 +196,7 @@ DSVector<T> DSVector<T>::operator +(T added) const {
     return (temp += added);
 }
 
+
 //Addition (for vector)
 template <class T>
 DSVector<T> DSVector<T>::operator+(const DSVector<T>& rhs) const {
@@ -193,12 +204,14 @@ DSVector<T> DSVector<T>::operator+(const DSVector<T>& rhs) const {
     return (temp += rhs);            //return left += right
 }
 
+
 //Plus-Assign (for T)
 template <class T>
 DSVector<T>& DSVector<T>::operator +=(const T pushed) {
     this->push_back(pushed);   //wraps push_back
     return *this;
 }
+
 
 //Plus-Assign (for vector)
 template <class T>
@@ -209,6 +222,7 @@ DSVector<T>& DSVector<T>::operator +=(const DSVector<T>& added) {
     }
     return *this;
 }
+
 
 //Stream Insertion
 template <class T>
@@ -222,6 +236,7 @@ std::ostream& operator<<(std::ostream& stream, const DSVector<T>& vect) {
     stream << std::endl;
     return stream;
 }
+
 
 //Comparison > (assumes that data type has >)
 template <class T>
@@ -243,6 +258,7 @@ bool DSVector<T>::operator >(const DSVector<T>& rhs) const {
     }
     return false;
 }
+
 
 //Comparison < (assumes that data type has <)
 template <class T>
@@ -266,6 +282,7 @@ bool DSVector<T>::operator <(const DSVector<T>& rhs) const {
 }
     //go through and compare each element until one is > or <
 
+
 //Subscript
 template<class T>
 T& DSVector<T>::operator[](int index) const{
@@ -283,6 +300,7 @@ T& DSVector<T>::operator[](int index) const{
 //UTILITY
 //=======
 
+
 //push_back
 template <class T>
 void DSVector<T>::push_back(T item) {
@@ -290,6 +308,7 @@ void DSVector<T>::push_back(T item) {
     array[size - 1] = item; //make last element the arg
     this->resize();         //resize
 }
+
 
 //pop_back
 template <class T>
@@ -299,6 +318,7 @@ void DSVector<T>::pop_back() {
         size--;                 //decrement size
     }
 }
+
 
 //insert
 template <class T>
@@ -318,6 +338,7 @@ void DSVector<T>::insert(T contents, int location) {
     }
 }
 
+
 //remove
 template <class T>
 void DSVector<T>::remove(int location) {
@@ -334,11 +355,13 @@ void DSVector<T>::remove(int location) {
     }
 }
 
+
 //isEmpty
 template <class T>
 bool DSVector<T>::isEmpty() {
     return(size == 0);  //is size == 0?
 }
+
 
 //resize (private); try calling everytime there's a push_back
 template <class T>
@@ -357,6 +380,7 @@ void DSVector<T>::resize() {
     }
 }
 
+
 //clear
 template <class T>
 void DSVector<T>::clear() {
@@ -365,6 +389,7 @@ void DSVector<T>::clear() {
     }
 }
 
+
 //swaps first element of array with second
 template <class T>
 void DSVector<T>::swap(int first, int second) {
@@ -372,6 +397,11 @@ void DSVector<T>::swap(int first, int second) {
     (*this)[first] = (*this)[second];
     (*this)[second] = temp;
 }
+
+
+//=======
+//SORTING
+//=======
 
 //sort
 template <class T>
@@ -393,6 +423,7 @@ void DSVector<T>::sort(int begin, int end) {
         array[bound+1] = select;
     }
 }
+
 
 //implementation of quicksort for sorting more efficiently
 template <class T>
@@ -416,6 +447,7 @@ void DSVector<T>::quicksort(int begin, int end) {
         }
     }
 }
+
 
 //function for partitioning array in single-pivot quicksort
 template <class T>
@@ -460,6 +492,7 @@ int DSVector<T>::partition(int begin, int end) {
     return i;
 }
 
+
 //find approximation of median through "median of three" method
 template <class T>
 int DSVector<T>::medianOfThree(int begin, int end) {
@@ -488,6 +521,7 @@ int DSVector<T>::medianOfThree(int begin, int end) {
         }
     }
 }
+
 
 //
 template <class T>
@@ -522,6 +556,7 @@ void DSVector<T>::dualPivotQuicksort(int begin, int end) {
     delete[] pivotLocs;
 
 }
+
 
 //
 template <class T>
