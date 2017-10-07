@@ -230,7 +230,7 @@ std::ostream& operator<<(std::ostream& stream, const DSVector<T>& vect) {
     //print each element separated by commas and spaces
     stream << vect[0];
     for(int i=1; i<vect.getSize(); i++) {
-        stream << ' ';
+        stream << '\n';
         stream << vect[i];
     }
     stream << std::endl;

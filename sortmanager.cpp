@@ -127,11 +127,26 @@ void SortManager::readWord(std::ifstream & inputStream) {
 //Writes the specified number of words to output file
 void SortManager::writeToOutput() {
     //create ostream object from output file name
+    std::ofstream fileOut;
+
     //open file
+    fileOut.open(output.c_str(), std::ios::out);
+
     //check to see file is open
+    if(!fileOut.is_open()) {
+        std::cout << "Output file failed to open." << std::endl;
+        return;
+    }
 
     //loop until numOutputs
+    for(int i=0; i<numOutputs && i<numWords; i++) {
         //print next word from wordlist
+        fileOut << (*wordList)[i] << '\n';
+    }
+    fileOut << std::endl;
+
+    //don't forget to close file
+    fileOut.close();
 }
 
 
@@ -154,7 +169,7 @@ void SortManager::sortWords() {
 void SortManager::runSortingCompetition() {
     readInputFile();
     std::cout << *wordList << std::endl;
-    sortWords();
+    //sortWords();
     //std::cout << wordList << std::endl;
     writeToOutput();
 
