@@ -9,9 +9,14 @@ SortManager::SortManager(){}
 
 
 //constructor which sets input and output file names
-SortManager::SortManager(const DSString & input, const DSString & output) {
+SortManager::SortManager(const DSString & inputFile, const DSString & outputFile) {
     //call various setters
-    //instantiate a DSVector of DSStrings
+    setInput(inputFile);
+    setOutput(outputFile);
+
+    //initialize wordList and other member data
+    int numWords;
+    int numOutputs;
 }
 
 
@@ -21,42 +26,42 @@ SortManager::SortManager(const DSString & input, const DSString & output) {
 //==================
 
 void SortManager::setInput(DSString fileName) {
-
+    input = fileName;
 }
 
 
 void SortManager::setOutput(DSString fileName) {
-
+    output = fileName;
 }
 
 
 void SortManager::setNumWords(int numberOfWords) {
-
+    numWords = numberOfWords;
 }
 
 
 void SortManager::setNumOutputs(int numberOfOutputs) {
-
+    numOutputs = numberOfOutputs;
 }
 
 
 DSString SortManager::getInput() {
-
+    return input;
 }
 
 
 DSString SortManager::getOutput() {
-
+    return output;
 }
 
 
 int SortManager::getNumWords() {
-
+    return numWords;
 }
 
 
 int SortManager::getNumOutputs() {
-
+    return numOutputs;
 }
 
 
