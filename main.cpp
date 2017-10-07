@@ -5,6 +5,7 @@
 #include "catch.hpp"
 #include "dsvector.hpp"
 #include "dsstring.h"
+#include "sortmanager.h"
 
 using namespace std;
 
@@ -20,7 +21,10 @@ int main(int argc, char *argv[])
         return 0;
     }
 
+    SortManager(argv[1], argv[2]).runSortingCompetition();
 
+
+    /*
     DSString fileName;
     DSVector<int> numbers = DSVector<int>();
     DSVector<char> currrentNumber = DSVector<char>();
@@ -45,4 +49,5 @@ int main(int argc, char *argv[])
 
     numbers.quicksort(0,numbers.getSize()-1);
     cout << numbers << endl;
+    */
 }

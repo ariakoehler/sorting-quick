@@ -25,9 +25,9 @@ public:
     int getNumWords();
     int getNumOutputs();
     void readInputFile();
-    void readNumWords(std::istream&);
-    void readNumOutputs(std::istream&);
-    void readWord(std::istream&);
+    void readNumWords(std::ifstream&);
+    void readNumOutputs(std::ifstream &);
+    DSString readWord(std::ifstream &);
     void writeToOutput();
     void sortWords();
     void runSortingCompetition();
