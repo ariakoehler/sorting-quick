@@ -92,6 +92,9 @@ void SortManager::readInputFile() {
     for(int i=0; i<numWords; i++) {
         readWord(fileIn);
     }
+
+    //don't forget to close the file
+    fileIn.close();
 }
 
 
@@ -101,7 +104,7 @@ void SortManager::readNumWords(std::ifstream & inputStream) {
     inputStream >> numWords;
 
     //set wordList to that size to speed things up
-    wordList = DSVector<DSString>(numWords);
+    wordList = new DSVector<DSString>(numWords);
 }
 
 
@@ -113,11 +116,11 @@ void SortManager::readNumOutputs(std::ifstream & inputStream) {
 
 
 //Reads an individual word and adds it to running list of words
-DSString SortManager::readWord(std::ifstream & inputStream) {
+void SortManager::readWord(std::ifstream & inputStream) {
     //read next line to a dsstring and return it
-    char * buffer = new char[30];
+    char buffer[30];
     inputStream >> buffer;
-    wordList.push_back(DSString(buffer));
+    wordList->push_back(DSString(buffer));
 }
 
 
@@ -140,7 +143,9 @@ void SortManager::writeToOutput() {
 //Calls DSVector's sort function on list of words
 void SortManager::sortWords() {
     //call whichever sorting algo is fastest
-    wordList.quicksort(0, wordList.getSize());
+    std::cout << wordList->getSize() << std::endl;
+    wordList->quicksort(0, wordList->getSize());
+    std::cout << *wordList << std::endl;
     //maybe include logic for determining which one will perform best
 }
 
@@ -148,6 +153,10 @@ void SortManager::sortWords() {
 //Runs high-level processes, calls lower-level functions
 void SortManager::runSortingCompetition() {
     readInputFile();
+    std::cout << *wordList << std::endl;
     sortWords();
+    //std::cout << wordList << std::endl;
     writeToOutput();
+
+    std::cout << wordList << std::endl;
 }

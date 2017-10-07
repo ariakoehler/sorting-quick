@@ -7,7 +7,7 @@
 class SortManager
 {
 private:
-    DSVector<DSString> wordList;
+    DSVector<DSString> * wordList;
     DSString input;
     DSString output;
     int numWords;
@@ -27,7 +27,7 @@ public:
     void readInputFile();
     void readNumWords(std::ifstream&);
     void readNumOutputs(std::ifstream &);
-    DSString readWord(std::ifstream &);
+    void readWord(std::ifstream &);
     void writeToOutput();
     void sortWords();
     void runSortingCompetition();

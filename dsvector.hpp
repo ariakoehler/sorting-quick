@@ -523,7 +523,7 @@ int DSVector<T>::medianOfThree(int begin, int end) {
 }
 
 
-//
+//calls recursive dual-pivot quicksort algorithm
 template <class T>
 void DSVector<T>::dualPivotQuicksort(int begin, int end) {
     //dualPivotPartition from begin to end
@@ -558,7 +558,7 @@ void DSVector<T>::dualPivotQuicksort(int begin, int end) {
 }
 
 
-//
+//partitions vector for dual-pivot quicksorting
 template <class T>
 int * DSVector<T>::dualPivotPartition(int begin, int end) {
     //if not already, put median1 at front and median2 at back
