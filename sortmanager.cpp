@@ -19,6 +19,10 @@ SortManager::SortManager(const DSString & inputFile, const DSString & outputFile
 }
 
 
+SortManager::~SortManager() {
+    delete wordList;
+}
+
 
 //==================
 //ACCESSORS/MUTATORS
@@ -158,20 +162,14 @@ void SortManager::writeToOutput() {
 //Calls DSVector's sort function on list of words
 void SortManager::sortWords() {
     //call whichever sorting algo is fastest
-    std::cout << wordList->getSize() << std::endl;
-    wordList->quicksort(0, wordList->getSize());
-    std::cout << *wordList << std::endl;
-    //maybe include logic for determining which one will perform best
+    wordList->quicksort(0, wordList->getSize()-1);
+    //maybe include logic for determining which one will perform best on a given dataset
 }
 
 
 //Runs high-level processes, calls lower-level functions
 void SortManager::runSortingCompetition() {
     readInputFile();
-    std::cout << *wordList << std::endl;
-    //sortWords();
-    //std::cout << wordList << std::endl;
+    sortWords();
     writeToOutput();
-
-    std::cout << wordList << std::endl;
 }

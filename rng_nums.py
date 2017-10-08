@@ -9,9 +9,9 @@ if __name__=='__main__':
     
     file_out = open('numbers.txt', 'w')
 
-    num_words = 50
+    num_words = 500000
 
-    file_out.write('{}\n{}\n'.format(num_words, num_words))
+    file_out.write('{}\n{}\n'.format(num_words, int(num_words/100)))
 
     for i in range(num_words):
         alpha = list('qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123645789')

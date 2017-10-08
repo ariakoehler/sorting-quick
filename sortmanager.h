@@ -16,6 +16,7 @@ private:
 public:
     SortManager();
     SortManager(const DSString&, const DSString&);
+    ~SortManager();
     void setInput(DSString);
     void setOutput(DSString);
     void setNumWords(int);
